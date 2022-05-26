@@ -72,12 +72,23 @@ public class MainActivity extends AppCompatActivity {
     public void newMatch() {  //A game is composed of three matches
 
         int operand1 = random.nextInt(10);
-        int operand2=0;
-        //check is operand2 is not zero; otherwise in case of division-divide by zero error will come
+        int operand2=random.nextInt(10);
+        correctButton=random.nextInt(10);
+        int correct_answer=-100;
         String operator = operators[random.nextInt(4)];
         textView2.setText(operand1 + operator + operand2);
 
       // Your code here, to diplay correct and incorrect options on the buttons
+        if(operator.equals("+"))
+            correct_answer=operand1+operand2;
+        else if(operator.equals("-"))
+            correct_answer=operand1-operand2;
+        else if(operator.equals("/"))
+            correct_answer=operand1/operand2;
+        else if(operator.equals("*"))
+            correct_answer=operand1*operand2;
+
+        correctButton=random.nextInt(9);
 
         if(matchCounter==3){    // if three matches are completed updatee the perfomrance in sharedpreferences
 
@@ -96,6 +107,9 @@ public class MainActivity extends AppCompatActivity {
         //Computing the sum of score array, which has the 1 or in each index,depending on correct or incorrect answers
         int sum=0;
        // your code here
+        for(int i=0;i<score.length;i++){
+            sum>sum+score[i];
+        }
         return sum;
     }
 
@@ -115,6 +129,13 @@ public class MainActivity extends AppCompatActivity {
     public String getInterpretation(int [][]dataFrame,double slope){
        //provide interpretation based on your slope analysis
         // Your code here
+        if(slope>=0 && slope<=0.5)
+            return"You are constantly great.";
+        if(slope>=-0.5 && slope<=0)
+            return"You need to work hard.";
+        else
+            return"I Don't know.";
+
         return "Your Interpretation";
     }
 }
